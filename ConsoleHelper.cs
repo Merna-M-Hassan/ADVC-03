@@ -16,5 +16,16 @@ namespace Assignment_12_C__Advanced
                 Console.WriteLine(string.Join(", ", list));
             }
         }
+
+        public static void PrintDictionary<TKey, TValue>(string dictionaryName, Dictionary<TKey, TValue> pairs)
+        {
+            if (!string.IsNullOrEmpty(dictionaryName) && pairs is not null && pairs.Count > 0)
+            {
+                foreach(KeyValuePair<TKey, TValue> pair in pairs)
+                {
+                    Console.WriteLine(pair);
+                }
+            }
+        }
     }
 }
