@@ -178,42 +178,90 @@ namespace Assignment_12_C__Advanced
 
             #region Q4) Unique Email Validator
 
-            //Create a HashSet<string> with a case-insensitive comparer: new HashSet<string>(StringComparer.OrdinalIgnoreCase)
-            HashSet<string> email = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            ////Create a HashSet<string> with a case-insensitive comparer: new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+            //HashSet<string> email = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
-            //Add emails:
-            bool email01 = email.Add("ahmed@test.com");
-            bool email02 = email.Add("AHMED@test.com");      
-            bool email03 = email.Add("sara@test.com");
-            bool email04 = email.Add("Sara@Test.Com");
+            ////Add emails:
+            //bool email01 = email.Add("ahmed@test.com");
+            //bool email02 = email.Add("AHMED@test.com");      
+            //bool email03 = email.Add("sara@test.com");
+            //bool email04 = email.Add("Sara@Test.Com");
 
-            //Print Count — how many are actually stored? Explain why.
-            Console.WriteLine($"{email.Count}");
-            //output: only two emails are printed. Because the upper case and lower case are considered the same (insensitive case).
+            ////Print Count — how many are actually stored? Explain why.
+            //Console.WriteLine($"{email.Count}");
+            ////output: only two emails are printed. Because the upper case and lower case are considered the same (insensitive case).
+            //Console.WriteLine();
+
+            ////Create two sets: Set A = {1,2,3,4,5} and Set B = {4,5,6,7,8}
+            //HashSet<int> setA = [ 1, 2, 3, 4, 5 ];
+            //HashSet<int> setB = [ 4, 5, 6, 7, 8 ];
+
+            ////Print the result of: UnionWith, IntersectWith, ExceptWith
+
+            //// UnionWith - combines both sets (all unique elements)
+            ////setA.UnionWith(setB);
+            ////ConsoleHelper.PrintHashSet("A Unionwith", setA);
+
+            //// IntersectWith - only elements present in both sets
+            ////setA.IntersectWith(setB);
+            ////ConsoleHelper.PrintHashSet("A IntersectWith", setA);
+
+            //// ExceptWith - elements in A that are not in B
+            ////setA.ExceptWith(setB);
+            ////ConsoleHelper.PrintHashSet("A ExceptWith", setA);
+
+            ////Use IsSubsetOf to check if {1,2} is a subset of Set A
+            //HashSet<int> setC = [1, 2];
+            //bool result = setC.IsSubsetOf(setA);
+            //Console.WriteLine(result);
+
+            #endregion
+
+            #region Q5) Print Queue Simulator
+
+            // Create Queue
+            Queue<string> files = new();
+
+            files.Enqueue("Report.pdf");
+            files.Enqueue("Invoice.pdf");
+            files.Enqueue("Letter.docx");
+            files.Enqueue("Resume.pdf");
+            files.Enqueue("Photo.jpg");
+
+
+            //Print the queue contents and Count
+            //foreach (string file in files)
+            //{
+            //    Console.WriteLine(file);
+            //}
+            ConsoleHelper.PrintQueue("All files", files);
+            Console.WriteLine(files.Count);
             Console.WriteLine();
 
-            //Create two sets: Set A = {1,2,3,4,5} and Set B = {4,5,6,7,8}
-            HashSet<int> setA = [ 1, 2, 3, 4, 5 ];
-            HashSet<int> setB = [ 4, 5, 6, 7, 8 ];
+            //Use Peek to see which document will print next (without removing)
+            //The first one to be served
+            Console.WriteLine(files.Peek());
+            Console.WriteLine();
 
-            //Print the result of: UnionWith, IntersectWith, ExceptWith
+            //Process the queue: Dequeue each document and print "Printing: [name]"
+            //int fileNo = 1;
 
-            // UnionWith - combines both sets (all unique elements)
-            //setA.UnionWith(setB);
-            //ConsoleHelper.PrintHashSet("A Unionwith", setA);
+            //while (files.Count > 0)
+            //{
+            //    string currentFile = files.Dequeue();
+            //    Console.WriteLine($"Printing #{fileNo}: {currentFile}");
+            //    fileNo++;
+            //}
 
-            // IntersectWith - only elements present in both sets
-            //setA.IntersectWith(setB);
-            //ConsoleHelper.PrintHashSet("A IntersectWith", setA);
+            Console.WriteLine();
 
-            // ExceptWith - elements in A that are not in B
-            //setA.ExceptWith(setB);
-            //ConsoleHelper.PrintHashSet("A ExceptWith", setA);
 
-            //Use IsSubsetOf to check if {1,2} is a subset of Set A
-            HashSet<int> setC = [1, 2];
-            bool result = setC.IsSubsetOf(setA);
-            Console.WriteLine(result);
+            //Try TryDequeue on the now-empty queue — what happens?
+            bool nowEmpty = files.TryDequeue(out string? value);
+            Console.WriteLine(nowEmpty);
+            Console.WriteLine(value ?? "Null");
+            //If keep the previous dequeue will be false, because the queue is alreay empty .
+            //If comment the previous will dequeue files successfully.
             #endregion
         }
     }

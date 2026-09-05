@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
@@ -33,6 +34,14 @@ namespace Assignment_12_C__Advanced
             if (!string.IsNullOrEmpty(hashName) && hashSet is not null && hashSet.Count > 0)
             {
                 Console.WriteLine($"{hashName}: {string.Join(", ", hashSet)}");
+            }
+        }
+
+        public static void PrintQueue<T>(string queueName, Queue<T> queueOrder)
+        {
+            if (!string.IsNullOrEmpty(queueName) && queueOrder is not null && queueOrder.Count > 0)
+            {
+                Console.WriteLine($"{queueName}: {string.Join(", ", queueOrder)}");
             }
         }
     }
