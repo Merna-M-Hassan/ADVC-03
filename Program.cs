@@ -59,58 +59,121 @@ namespace Assignment_12_C__Advanced
 
             #region Q2) Leaderboard
 
-            // Add: 500="Ahmed", 200="Sara", 800="Ali", 350="Mona"
-            //This is an empty dictionary. 
-            // The array of bucket = zero. With adding the first key&value pair, the array of bucket will be = 3 (nearest prime number).
-            Dictionary<int, string> leaderboard = new()
+            //// Add: 500="Ahmed", 200="Sara", 800="Ali", 350="Mona"
+            ////This is an empty dictionary. 
+            //// The array of bucket = zero. With adding the first key&value pair, the array of bucket will be = 3 (nearest prime number).
+            //Dictionary<int, string> leaderboard = new()
+            //{
+            //    {500, "Ahmed"},
+            //    {200, "Sara"},
+            //    {800, "Ali"},
+            //    {350, "Mona"},
+            //};
+
+            ////Print all entries (they should be sorted by score automatically)
+            ////foreach (KeyValuePair<int, string> pair in leaderboard)
+            ////{
+            ////    Console.WriteLine(pair);
+            ////}
+            //ConsoleHelper.PrintDictionary<int, string>("Scores ", leaderboard);
+            //Console.WriteLine();
+
+
+            ////Access the first key and first value
+            //var firstEntry = leaderboard.First();
+            //Console.WriteLine($"First Key: {firstEntry.Key}");
+            //Console.WriteLine($"First Value: {firstEntry.Value}");
+            //Console.WriteLine();
+
+            ////Check if score 500 exists
+            ////if (leaderboard.ContainsKey(500))
+            ////    Console.WriteLine("The player exists.");
+
+            ////else
+            ////    Console.WriteLine("Not Found");
+            //string? check = leaderboard.GetValueOrDefault(500);
+            //Console.WriteLine($"Palyer {check} exists");
+            //Console.WriteLine();
+
+
+            ////Safely get the player with score 999
+            ////if(leaderboard.ContainsKey(900))
+            ////    Console.WriteLine(leaderboard[900]);
+
+            ////else
+            ////    Console.WriteLine("Not Found");
+            ////Console.WriteLine();
+            //bool result = leaderboard.TryGetValue(999, out string? value);
+            //Console.WriteLine(result);
+            //Console.WriteLine(value ?? "null");
+            //Console.WriteLine();
+
+            ////Remove the player with score 200 and print the updated list
+            //leaderboard.Remove(200);
+            //ConsoleHelper.PrintDictionary("After remove", leaderboard);
+
+            #endregion
+
+            #region Q3) Phone Book
+            //Create a Collection with 4 contacts (name → phone number)
+            Dictionary<string, string> phoneBook = new()
             {
-                {500, "Ahmed"},
-                {200, "Sara"},
-                {800, "Ali"},
-                {350, "Mona"},
+                { "Ahmed", "555-1234" },
+                { "Sara", "555-5678" },
+                { "Ali", "555-9012" },
+                { "Mona", "555-3456" }
             };
 
-            //Print all entries (they should be sorted by score automatically)
-            //foreach (KeyValuePair<int, string> pair in leaderboard)
-            //{
-            //    Console.WriteLine(pair);
-            //}
-            ConsoleHelper.PrintDictionary<int, string>("Scores ", leaderboard);
+            //Add a new contact using [] syntax (add or update)
+            phoneBook["Khaled"] = "12356885";
+            //update
+            phoneBook["Ali"] = "55569547";
+            ConsoleHelper.PrintDictionary("After modify", phoneBook);
             Console.WriteLine();
 
 
-            //Access the first key and first value
-            var firstEntry = leaderboard.First();
-            Console.WriteLine($"First Key: {firstEntry.Key}");
-            Console.WriteLine($"First Value: {firstEntry.Value}");
-            Console.WriteLine();
-
-            //Check if score 500 exists
-            //if (leaderboard.ContainsKey(500))
-            //    Console.WriteLine("The player exists.");
-
-            //else
-            //    Console.WriteLine("Not Found");
-            string? check = leaderboard.GetValueOrDefault(500);
-            Console.WriteLine($"Palyer {check} exists");
+            //Try adding a duplicate using .Add() — catch the exception and print the error
+            try
+            {
+                phoneBook.Add("Sara", "555-7777");
+            }
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
             Console.WriteLine();
 
 
-            //Safely get the player with score 999
-            //if(leaderboard.ContainsKey(900))
-            //    Console.WriteLine(leaderboard[900]);
-
-            //else
-            //    Console.WriteLine("Not Found");
-            //Console.WriteLine();
-            bool result = leaderboard.TryGetValue(999, out string? value);
-            Console.WriteLine(result);
-            Console.WriteLine(value ?? "null");
+            //Try adding a duplicate using .TryAdd() — print whether it succeeded
+            bool added = phoneBook.TryAdd("Sara", "555-8888");
+            Console.WriteLine($"Was Sara added? {added}");
+            Console.WriteLine();    
+            added = phoneBook.TryAdd("Lili", "45322255");
+            Console.WriteLine($"Was Nadia added? {added}");
             Console.WriteLine();
 
-            //Remove the player with score 200 and print the updated list
-            leaderboard.Remove(200);
-            ConsoleHelper.PrintDictionary("After remove", leaderboard);
+            //Search for a contact that doesn’t exist
+            if (phoneBook.ContainsKey("Sami"))
+                Console.WriteLine("The name exists.");
+
+            else
+                Console.WriteLine("Not exist");
+            Console.WriteLine();
+
+            //Get a contact with a fallback of "Not Found"
+            if (phoneBook.TryGetValue("Shady", out string? value))
+            {
+                Console.WriteLine($"{value}");
+            }
+            else
+            {
+                Console.WriteLine($"Shady Not Found");
+            }
+            Console.WriteLine();
+
+            //Print all Keys on one line, then all Values on another line
+            Console.WriteLine("Keys:   " + string.Join(", ", phoneBook.Keys));
+            Console.WriteLine("Values: " + string.Join(", ", phoneBook.Values));
             #endregion
         }
     }
