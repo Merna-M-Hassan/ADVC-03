@@ -27,5 +27,13 @@ namespace Assignment_12_C__Advanced
                 }
             }
         }
+
+        public static void PrintHashSet<T>(string hashName, HashSet<T> hashSet)
+        {
+            if (!string.IsNullOrEmpty(hashName) && hashSet is not null && hashSet.Count > 0)
+            {
+                Console.WriteLine($"{hashName}: {string.Join(", ", hashSet)}");
+            }
+        }
     }
 }

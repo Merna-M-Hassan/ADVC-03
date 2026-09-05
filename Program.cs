@@ -115,65 +115,105 @@ namespace Assignment_12_C__Advanced
             #endregion
 
             #region Q3) Phone Book
-            //Create a Collection with 4 contacts (name → phone number)
-            Dictionary<string, string> phoneBook = new()
-            {
-                { "Ahmed", "555-1234" },
-                { "Sara", "555-5678" },
-                { "Ali", "555-9012" },
-                { "Mona", "555-3456" }
-            };
+            ////Create a Collection with 4 contacts (name → phone number)
+            //Dictionary<string, string> phoneBook = new()
+            //{
+            //    { "Ahmed", "555-1234" },
+            //    { "Sara", "555-5678" },
+            //    { "Ali", "555-9012" },
+            //    { "Mona", "555-3456" }
+            //};
 
-            //Add a new contact using [] syntax (add or update)
-            phoneBook["Khaled"] = "12356885";
-            //update
-            phoneBook["Ali"] = "55569547";
-            ConsoleHelper.PrintDictionary("After modify", phoneBook);
+            ////Add a new contact using [] syntax (add or update)
+            //phoneBook["Khaled"] = "12356885";
+            ////update
+            //phoneBook["Ali"] = "55569547";
+            //ConsoleHelper.PrintDictionary("After modify", phoneBook);
+            //Console.WriteLine();
+
+
+            ////Try adding a duplicate using .Add() — catch the exception and print the error
+            //try
+            //{
+            //    phoneBook.Add("Sara", "555-7777");
+            //}
+            //catch (ArgumentException ex)
+            //{
+            //    Console.WriteLine($"Error: {ex.Message}");
+            //}
+            //Console.WriteLine();
+
+
+            ////Try adding a duplicate using .TryAdd() — print whether it succeeded
+            //bool added = phoneBook.TryAdd("Sara", "555-8888");
+            //Console.WriteLine($"Was Sara added? {added}");
+            //Console.WriteLine();    
+            //added = phoneBook.TryAdd("Lili", "45322255");
+            //Console.WriteLine($"Was Nadia added? {added}");
+            //Console.WriteLine();
+
+            ////Search for a contact that doesn’t exist
+            //if (phoneBook.ContainsKey("Sami"))
+            //    Console.WriteLine("The name exists.");
+
+            //else
+            //    Console.WriteLine("Not exist");
+            //Console.WriteLine();
+
+            ////Get a contact with a fallback of "Not Found"
+            //if (phoneBook.TryGetValue("Shady", out string? value))
+            //{
+            //    Console.WriteLine($"{value}");
+            //}
+            //else
+            //{
+            //    Console.WriteLine($"Shady Not Found");
+            //}
+            //Console.WriteLine();
+
+            ////Print all Keys on one line, then all Values on another line
+            //Console.WriteLine("Keys:   " + string.Join(", ", phoneBook.Keys));
+            //Console.WriteLine("Values: " + string.Join(", ", phoneBook.Values));
+            #endregion
+
+            #region Q4) Unique Email Validator
+
+            //Create a HashSet<string> with a case-insensitive comparer: new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+            HashSet<string> email = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+            //Add emails:
+            bool email01 = email.Add("ahmed@test.com");
+            bool email02 = email.Add("AHMED@test.com");      
+            bool email03 = email.Add("sara@test.com");
+            bool email04 = email.Add("Sara@Test.Com");
+
+            //Print Count — how many are actually stored? Explain why.
+            Console.WriteLine($"{email.Count}");
+            //output: only two emails are printed. Because the upper case and lower case are considered the same (insensitive case).
             Console.WriteLine();
 
+            //Create two sets: Set A = {1,2,3,4,5} and Set B = {4,5,6,7,8}
+            HashSet<int> setA = [ 1, 2, 3, 4, 5 ];
+            HashSet<int> setB = [ 4, 5, 6, 7, 8 ];
 
-            //Try adding a duplicate using .Add() — catch the exception and print the error
-            try
-            {
-                phoneBook.Add("Sara", "555-7777");
-            }
-            catch (ArgumentException ex)
-            {
-                Console.WriteLine($"Error: {ex.Message}");
-            }
-            Console.WriteLine();
+            //Print the result of: UnionWith, IntersectWith, ExceptWith
 
+            // UnionWith - combines both sets (all unique elements)
+            //setA.UnionWith(setB);
+            //ConsoleHelper.PrintHashSet("A Unionwith", setA);
 
-            //Try adding a duplicate using .TryAdd() — print whether it succeeded
-            bool added = phoneBook.TryAdd("Sara", "555-8888");
-            Console.WriteLine($"Was Sara added? {added}");
-            Console.WriteLine();    
-            added = phoneBook.TryAdd("Lili", "45322255");
-            Console.WriteLine($"Was Nadia added? {added}");
-            Console.WriteLine();
+            // IntersectWith - only elements present in both sets
+            //setA.IntersectWith(setB);
+            //ConsoleHelper.PrintHashSet("A IntersectWith", setA);
 
-            //Search for a contact that doesn’t exist
-            if (phoneBook.ContainsKey("Sami"))
-                Console.WriteLine("The name exists.");
+            // ExceptWith - elements in A that are not in B
+            //setA.ExceptWith(setB);
+            //ConsoleHelper.PrintHashSet("A ExceptWith", setA);
 
-            else
-                Console.WriteLine("Not exist");
-            Console.WriteLine();
-
-            //Get a contact with a fallback of "Not Found"
-            if (phoneBook.TryGetValue("Shady", out string? value))
-            {
-                Console.WriteLine($"{value}");
-            }
-            else
-            {
-                Console.WriteLine($"Shady Not Found");
-            }
-            Console.WriteLine();
-
-            //Print all Keys on one line, then all Values on another line
-            Console.WriteLine("Keys:   " + string.Join(", ", phoneBook.Keys));
-            Console.WriteLine("Values: " + string.Join(", ", phoneBook.Values));
+            //Use IsSubsetOf to check if {1,2} is a subset of Set A
+            HashSet<int> setC = [1, 2];
+            bool result = setC.IsSubsetOf(setA);
+            Console.WriteLine(result);
             #endregion
         }
     }
