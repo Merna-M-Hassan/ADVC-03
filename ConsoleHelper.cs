@@ -44,5 +44,13 @@ namespace Assignment_12_C__Advanced
                 Console.WriteLine($"{queueName}: {string.Join(", ", queueOrder)}");
             }
         }
+
+        public static void PrintStack<T>(string stackName, Stack<T> stk)
+        {
+            if (!string.IsNullOrEmpty(stackName) && stk is not null && stk.Count > 0)
+            {
+                Console.WriteLine($"{stackName}: {string.Join(", ", stk)}");
+            }
+        }
     }
 }

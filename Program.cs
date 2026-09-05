@@ -219,49 +219,93 @@ namespace Assignment_12_C__Advanced
 
             #region Q5) Print Queue Simulator
 
-            // Create Queue
-            Queue<string> files = new();
+            //// Create Queue
+            //Queue<string> files = new();
 
-            files.Enqueue("Report.pdf");
-            files.Enqueue("Invoice.pdf");
-            files.Enqueue("Letter.docx");
-            files.Enqueue("Resume.pdf");
-            files.Enqueue("Photo.jpg");
+            //files.Enqueue("Report.pdf");
+            //files.Enqueue("Invoice.pdf");
+            //files.Enqueue("Letter.docx");
+            //files.Enqueue("Resume.pdf");
+            //files.Enqueue("Photo.jpg");
 
 
-            //Print the queue contents and Count
-            //foreach (string file in files)
-            //{
-            //    Console.WriteLine(file);
-            //}
-            ConsoleHelper.PrintQueue("All files", files);
-            Console.WriteLine(files.Count);
+            ////Print the queue contents and Count
+            ////foreach (string file in files)
+            ////{
+            ////    Console.WriteLine(file);
+            ////}
+            //ConsoleHelper.PrintQueue("All files", files);
+            //Console.WriteLine(files.Count);
+            //Console.WriteLine();
+
+            ////Use Peek to see which document will print next (without removing)
+            ////The first one to be served
+            //Console.WriteLine(files.Peek());
+            //Console.WriteLine();
+
+            ////Process the queue: Dequeue each document and print "Printing: [name]"
+            ////int fileNo = 1;
+
+            ////while (files.Count > 0)
+            ////{
+            ////    string currentFile = files.Dequeue();
+            ////    Console.WriteLine($"Printing #{fileNo}: {currentFile}");
+            ////    fileNo++;
+            ////}
+
+            //Console.WriteLine();
+
+
+            ////Try TryDequeue on the now-empty queue — what happens?
+            //bool nowEmpty = files.TryDequeue(out string? value);
+            //Console.WriteLine(nowEmpty);
+            //Console.WriteLine(value ?? "Null");
+            ////If keep the previous dequeue will be false, because the queue is alreay empty .
+            ////If comment the previous will dequeue files successfully.
+
+            #endregion
+
+            #region Q6) Browser History (Undo)
+
+            //Create a Stack<string> for browser history
+            Stack<string> browser = new();
+
+            //Push 5 URLs
+            browser.Push("google.com");
+            browser.Push("github.com");
+            browser.Push("stackoverflow.com");
+            browser.Push("youtube.com");
+            browser.Push("claude.ai");
             Console.WriteLine();
 
-            //Use Peek to see which document will print next (without removing)
-            //The first one to be served
-            Console.WriteLine(files.Peek());
+            //Use Peek to see the current page (top of stack)
+            Console.WriteLine(browser.Peek());
             Console.WriteLine();
 
-            //Process the queue: Dequeue each document and print "Printing: [name]"
-            //int fileNo = 1;
-
-            //while (files.Count > 0)
-            //{
-            //    string currentFile = files.Dequeue();
-            //    Console.WriteLine($"Printing #{fileNo}: {currentFile}");
-            //    fileNo++;
-            //}
-
+            //Press "back" 3 times using Pop — print each page you leave
+            int backCount = 3;
+            for (int i = 1; i <= backCount; i++)
+            {
+                if (browser.Count > 0)
+                {
+                    string leavingPage = browser.Pop();
+                    Console.WriteLine($"Back #{i}: Left '{leavingPage}'");
+                }
+                else
+                {
+                    Console.WriteLine($"Can't go back #{i} - history is empty!");
+                }
+            }
             Console.WriteLine();
 
+            //Print the current page after going back
+            ConsoleHelper.PrintStack("The opening browser", browser);
+            Console.WriteLine() ;   
 
-            //Try TryDequeue on the now-empty queue — what happens?
-            bool nowEmpty = files.TryDequeue(out string? value);
-            Console.WriteLine(nowEmpty);
-            Console.WriteLine(value ?? "Null");
-            //If keep the previous dequeue will be false, because the queue is alreay empty .
-            //If comment the previous will dequeue files successfully.
+            //Try TryPop on an empty stack — what happens?
+           bool result = browser.TryPop(out string value);
+            Console.WriteLine(result);
+            //output: Successfully popped
             #endregion
         }
     }
